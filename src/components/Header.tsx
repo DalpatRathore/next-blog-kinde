@@ -13,6 +13,10 @@ const navLinks = [
     herf: "/posts",
     label: "Posts",
   },
+  {
+    herf: "/create-post",
+    label: "Create Post",
+  },
 ];
 
 const Header = () => {

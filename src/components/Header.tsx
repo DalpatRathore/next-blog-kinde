@@ -3,6 +3,7 @@ import Image from "next/image";
 import logo from "/public/logo.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
 
 const navLinks = [
   {
@@ -26,6 +27,7 @@ const Header = () => {
       <Link href={"/"}>
         <Image src={logo} alt="logo" width={100} height={100}></Image>
       </Link>
+      <LogoutLink>Log out</LogoutLink>
       <nav>
         <ul className="flex gap-x-5 text-sm">
           {navLinks.map(link => (

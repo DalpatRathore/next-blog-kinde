@@ -1,22 +1,32 @@
+import prisma from "@/config/db";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-const postsUrl = "https://dummyjson.com/posts";
-type PostDetails = {
-  id: number;
-  title: string;
-  body: string;
-  tags: string[];
-  reactions: {
-    likes: number;
-    dislikes: number;
-  };
-  views: number;
-  userId: number;
-};
+// const postsUrl = "https://dummyjson.com/posts";
+// type PostDetails = {
+//   id: number;
+//   title: string;
+//   body: string;
+//   tags: string[];
+//   reactions: {
+//     likes: number;
+//     dislikes: number;
+//   };
+//   views: number;
+//   userId: number;
+// };
 const PostIdPage = async ({ params }: { params: { postId: string } }) => {
   await new Promise(resolve => setTimeout(resolve, 2000));
-  const response = await fetch(`${postsUrl}/${params.postId}`);
-  const post: PostDetails = await response.json();
+  // const response = await fetch(`${postsUrl}/${params.postId}`);
+  // const post: PostDetails = await response.json();
+  const post = await prisma.post.findUnique({
+    where: {
+      id: Number(params.postId),
+    },
+  });
+  if (!post) {
+    return notFound();
+  }
   return (
     <div className="max-w-5xl mx-auto pt-10">
       <h2 className="text-2xl font-semibold mb-5">Post Details:</h2>
@@ -29,31 +39,31 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
           </div>
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">Views</dt>
-            <dd className="text-gray-700 sm:col-span-2">{post.views}</dd>
+            {/* <dd className="text-gray-700 sm:col-span-2">{post.views}</dd> */}
           </div>
 
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">Tags</dt>
             <dd className="text-gray-700 sm:col-span-2">
-              {post.tags.map(tag => (
+              {/* {post.tags.map(tag => (
                 <span key={tag} className="mx-2 capitalize">
                   {tag}
                 </span>
-              ))}
+              ))} */}
             </dd>
           </div>
 
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">Reactions</dt>
             <dd className="text-gray-700 sm:col-span-2 space-x-2">
-              <span>Likes: {post.reactions.likes}</span>
-              <span>Dislikes: {post.reactions.dislikes}</span>
+              {/* <span>Likes: {post.reactions.likes}</span>
+              <span>Dislikes: {post.reactions.dislikes}</span> */}
             </dd>
           </div>
 
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">Content</dt>
-            <dd className="text-gray-700 sm:col-span-2">{post.body}</dd>
+            <dd className="text-gray-700 sm:col-span-2">{post.content}</dd>
           </div>
         </dl>
       </div>

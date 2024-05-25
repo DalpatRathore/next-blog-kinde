@@ -45,6 +45,7 @@ const CreatePostPage = () => {
 
               <textarea
                 id="content"
+                name="content"
                 className="mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white p-5"
                 rows={6}
                 placeholder="Enter content notes..."

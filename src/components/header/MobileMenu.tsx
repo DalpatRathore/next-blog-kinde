@@ -30,16 +30,16 @@ const MobileMenu = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <Button size={"icon"}>
-          <Menu></Menu>
-        </Button>
+        <Menu className="w-8 h-8"></Menu>
       </SheetTrigger>
       <SheetContent>
-        <nav className="w-full flex flex-col gap-4 mt-5 space-y-5">
+        <nav className="w-full flex flex-col gap-4 mt-5">
           {navLinks.map(link => (
             <SheetClose asChild key={link.herf}>
               <Link href={link.herf}>
-                <Button>{link.label}</Button>
+                <Button className="w-full" variant={"outline"}>
+                  {link.label}
+                </Button>
               </Link>
             </SheetClose>
           ))}

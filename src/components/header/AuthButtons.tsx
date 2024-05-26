@@ -8,7 +8,7 @@ const AuthButtons = () => {
 
   if (isLoading) {
     return (
-      <Button variant={"secondary"}>
+      <Button variant={"secondary"} size={"default"}>
         <Loader2 className="animate-spin w-5 h-5"></Loader2>
       </Button>
     );
@@ -19,7 +19,7 @@ const AuthButtons = () => {
       {isAuthenticated ? (
         <Button variant={"outline"}>
           <LogoutLink className="flex items-center justify-center">
-            <LogOut className="w-5 h-5 mr-2"></LogOut> Log out
+            <LogOut className="w-5 h-5 mr-2"></LogOut> Logout
           </LogoutLink>
         </Button>
       ) : (

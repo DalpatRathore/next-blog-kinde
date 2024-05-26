@@ -4,6 +4,7 @@ import logo from "/public/logo.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   {
@@ -44,6 +45,7 @@ const Header = () => {
           ))}
         </ul>
       </nav>
+      <ThemeToggle></ThemeToggle>
     </header>
   );
 };

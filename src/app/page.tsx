@@ -4,7 +4,9 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="text-center pt-20 px-5">
-      <h1 className="text-4xl font-bold mb-3">Welcome to my Blog</h1>
+      <h1 className="text-4xl font-bold mb-3">
+        Welcome to the Next Blog Kinde
+      </h1>
       <p className="max-w-3xl mx-auto text-muted-foreground italic">
         Laudantium accusamus eligendi nam, vero velit error architecto rem
         magnam.

@@ -66,7 +66,7 @@ const PostForm = () => {
               <FormItem className="flex flex-col items-start">
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input placeholder="Post title..." {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -79,7 +79,11 @@ const PostForm = () => {
               <FormItem className="flex flex-col items-start">
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="content..." {...field}></Textarea>
+                  <Textarea
+                    placeholder="Post content..."
+                    rows={6}
+                    {...field}
+                  ></Textarea>
                 </FormControl>
 
                 <FormMessage />

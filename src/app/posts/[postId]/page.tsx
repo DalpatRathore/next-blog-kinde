@@ -1,4 +1,8 @@
+import { Button } from "@/components/ui/button";
 import prisma from "@/config/db";
+import { formatDateTime } from "@/lib/formatters";
+import { CalendarDays, NotebookPen, PenTool, Undo2 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -19,80 +23,56 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
   await new Promise(resolve => setTimeout(resolve, 2000));
   // const response = await fetch(`${postsUrl}/${params.postId}`);
   // const post: PostDetails = await response.json();
+
   const post = await prisma.post.findUnique({
     where: {
       id: Number(params.postId),
     },
   });
+
   if (!post) {
     return notFound();
   }
+  console.log(post.createdAt);
   return (
-    <div className="max-w-5xl mx-auto pt-10">
-      <h2 className="text-2xl font-semibold mb-5">Post Details:</h2>
+    <div className="w-full max-w-3xl mx-auto py-10 px-5">
+      <h2 className="text-2xl md:text-3xl font-semibold mb-5 text-muted-foreground">
+        Post Details
+      </h2>
+      <article className="overflow-hidden rounded-lg shadow border">
+        <Image
+          alt=""
+          width={500}
+          height={250}
+          src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+          className="h-56 w-full object-cover"
+        />
 
-      <div className="flow-root rounded-lg border border-gray-100 p-3 shadow-sm">
-        <dl className="-my-3 divide-y divide-gray-100 text-sm">
-          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">Title</dt>
-            <dd className="text-gray-700 sm:col-span-2">{post.title}</dd>
-          </div>
-          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">Views</dt>
-            {/* <dd className="text-gray-700 sm:col-span-2">{post.views}</dd> */}
-          </div>
+        <div className="p-4 sm:p-6 space-y-5">
+          <h3 className="text-xl md:text-2xl lg:text-4xl flex items-center justify-start gap-1 uppercase">
+            <PenTool className="w-5 h-5 md:w-8 md:h-8 -rotate-90"></PenTool>
+            {post.title}
+          </h3>
 
-          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">Tags</dt>
-            <dd className="text-gray-700 sm:col-span-2">
-              {/* {post.tags.map(tag => (
-                <span key={tag} className="mx-2 capitalize">
-                  {tag}
-                </span>
-              ))} */}
-            </dd>
-          </div>
+          <time
+            dateTime={`${post.createdAt}`}
+            className="text-xs flex items-center justify-start gap-2 text-muted-foreground"
+          >
+            <CalendarDays className="w-5 h-5"></CalendarDays>
+            {formatDateTime(post.createdAt)}
+          </time>
 
-          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">Reactions</dt>
-            <dd className="text-gray-700 sm:col-span-2 space-x-2">
-              {/* <span>Likes: {post.reactions.likes}</span>
-              <span>Dislikes: {post.reactions.dislikes}</span> */}
-            </dd>
-          </div>
-
-          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">Content</dt>
-            <dd className="text-gray-700 sm:col-span-2">{post.content}</dd>
-          </div>
-        </dl>
-      </div>
+          <p className="text-xs md:text-base border-l-4 ml-2 pl-3">
+            {post.content}
+          </p>
+        </div>
+      </article>
       <div className="flex items-center justify-center mt-10">
-        <Link
-          className="group flex items-center justify-between gap-4 rounded-lg border border-current px-5 py-3 text-indigo-600 transition-colors hover:bg-indigo-600 focus:outline-none focus:ring active:bg-indigo-500"
-          href={"/posts"}
-        >
-          <span className="font-medium transition-colors group-hover:text-white">
-            Back to Posts
-          </span>
-
-          <span className="shrink-0 rounded-full border border-indigo-600 bg-white p-2 group-active:border-indigo-500">
-            <svg
-              className="size-5 rtl:rotate-180"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </span>
-        </Link>
+        <Button asChild size={"lg"} variant={"outline"}>
+          <Link href={"/posts"}>
+            Back to Posts <Undo2 className="w-5 h-5 ml-2 mb-1"></Undo2>
+          </Link>
+        </Button>
       </div>
     </div>
   );

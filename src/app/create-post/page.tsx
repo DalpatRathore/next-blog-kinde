@@ -3,7 +3,7 @@ import PostForm from "@/components/PostForm";
 
 const CreatePostPage = () => {
   return (
-    <main className="text-center pt-32 px-5">
+    <main className="text-center py-10 px-5">
       <h1 className="text-4xl font-bold mb-5">Create New Post</h1>
       <div className="">
         {/* <form action={createPost} className="max-w-sm mx-auto text-left">

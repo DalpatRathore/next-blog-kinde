@@ -11,11 +11,11 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const data = body.data;
 
-  await prisma.post.create({
+  const response = await prisma.post.create({
     data: {
       title: data.title,
       content: data.content,
     },
   });
-  return NextResponse.json({ message: "ok" });
+  return NextResponse.json({ response });
 }

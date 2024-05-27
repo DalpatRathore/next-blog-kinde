@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -27,6 +29,7 @@ const formSchema = z.object({
 });
 
 const PostForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,6 +37,8 @@ const PostForm = () => {
       content: "",
     },
   });
+
+  const isSubmitting = form.formState.isSubmitting;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const response = await fetch("/api/create-post", {
@@ -46,6 +51,9 @@ const PostForm = () => {
     });
     const result = await response.json();
     form.reset();
+    if (result) {
+      router.push(`/posts/${result.response.id}`);
+    }
   }
   return (
     <div className="max-w-xl mx-auto my-5">
@@ -78,9 +86,20 @@ const PostForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full max-w-xl">
-            Submit
-          </Button>
+          {isSubmitting ? (
+            <Button type="button" className="w-full max-w-xl italic" disabled>
+              <Loader2 className="animate-spin w-4 h-4 mr-2"></Loader2>{" "}
+              Submitting Post ...
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              className="w-full max-w-xl"
+              disabled={isSubmitting}
+            >
+              Submit
+            </Button>
+          )}
         </form>
       </Form>
     </div>

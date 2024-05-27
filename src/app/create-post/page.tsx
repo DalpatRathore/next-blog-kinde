@@ -1,11 +1,12 @@
-import { createPost } from "@/actions/create-post";
+// import { createPost } from "@/actions/create-post";
+import PostForm from "@/components/PostForm";
 
 const CreatePostPage = () => {
   return (
     <main className="text-center pt-32 px-5">
       <h1 className="text-4xl font-bold mb-5">Create New Post</h1>
       <div className="">
-        <form action={createPost} className="max-w-sm mx-auto text-left">
+        {/* <form action={createPost} className="max-w-sm mx-auto text-left">
           <label
             htmlFor="website-admin"
             className="block mb-2 text-sm font-medium text-gray-900"
@@ -60,20 +61,8 @@ const CreatePostPage = () => {
               Submit
             </button>
           </div>
-        </form>
-        <p
-          id="helper-text-explanation"
-          className="mt-2 text-sm text-gray-500 dark:text-gray-400"
-        >
-          We&apos;ll never share your details. Read our{" "}
-          <a
-            href="#"
-            className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-          >
-            Privacy Policy
-          </a>
-          .
-        </p>
+        </form> */}
+        <PostForm></PostForm>
       </div>
     </main>
   );

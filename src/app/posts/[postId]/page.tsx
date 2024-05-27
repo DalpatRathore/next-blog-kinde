@@ -33,7 +33,6 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
   if (!post) {
     return notFound();
   }
-  console.log(post.createdAt);
   return (
     <div className="w-full max-w-3xl mx-auto py-10 px-5">
       <h2 className="text-2xl md:text-3xl font-semibold mb-5 text-muted-foreground">

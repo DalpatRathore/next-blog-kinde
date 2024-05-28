@@ -5,7 +5,7 @@ import { Suspense } from "react";
 const PostsPage = async () => {
   return (
     <main className="w-full max-w-3xl mx-auto py-10 px-5">
-      <h1 className="text-2xl md:text-4xl font-bold mb-5 text-muted-foreground uppercase drop-shadow">
+      <h1 className="text-2xl md:text-4xl font-bold mb-5 text-muted-foreground drop-shadow">
         All Posts
       </h1>
       <Suspense fallback={<PostSkeleton />}>

@@ -1,39 +1,33 @@
+import { Button } from "@/components/ui/button";
+import { Undo2 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const NotFound = () => {
   return (
-    <div className="w-full max-w-5xl mx-auto pt-10">
-      <h2 className="text-2xl font-semibold mb-5">Post Details:</h2>
-
-      <div className="rounded-lg border border-gray-100 p-3 shadow-sm flex items-center justify-center h-40">
-        <p className="italic">No post available for id</p>
+    <div className="w-full max-w-3xl mx-auto py-10 px-5">
+      <h2 className="text-2xl md:text-3xl font-semibold mb-5 text-muted-foreground">
+        Post Details
+      </h2>
+      <div className="relative">
+        <Image
+          alt=""
+          width={500}
+          height={250}
+          src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          className="h-64 w-full object-cover sm:h-80 lg:h-96"
+        />
+        <p className="w-96 text-gray-900 text-3xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  py-10 px-8 backdrop-blur-xl">
+          Post details not found!
+        </p>
       </div>
-      <div className="flex items-center justify-center mt-10">
-        <Link
-          className="group flex items-center justify-between gap-4 rounded-lg border border-current px-5 py-3 text-indigo-600 transition-colors hover:bg-indigo-600 focus:outline-none focus:ring active:bg-indigo-500"
-          href={"/posts"}
-        >
-          <span className="font-medium transition-colors group-hover:text-white">
-            Back to Posts
-          </span>
 
-          <span className="shrink-0 rounded-full border border-indigo-600 bg-white p-2 group-active:border-indigo-500">
-            <svg
-              className="size-5 rtl:rotate-180"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </span>
-        </Link>
+      <div className="flex items-center justify-center mt-10">
+        <Button asChild size={"lg"} variant={"outline"}>
+          <Link href={"/posts"}>
+            Back to Posts <Undo2 className="w-5 h-5 ml-2 mb-1"></Undo2>
+          </Link>
+        </Button>
       </div>
     </div>
   );

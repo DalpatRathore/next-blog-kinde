@@ -8,28 +8,12 @@ import { notFound } from "next/navigation";
 import DeletePost from "./_components/DeletePost";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-// const postsUrl = "https://dummyjson.com/posts";
-// type PostDetails = {
-//   id: number;
-//   title: string;
-//   body: string;
-//   tags: string[];
-//   reactions: {
-//     likes: number;
-//     dislikes: number;
-//   };
-//   views: number;
-//   userId: number;
-// };
-
 const isNumeric = (str: string) => {
   return /^\d+$/.test(str);
 };
 
 const PostIdPage = async ({ params }: { params: { postId: string } }) => {
   await new Promise(resolve => setTimeout(resolve, 2000));
-  // const response = await fetch(`${postsUrl}/${params.postId}`);
-  // const post: PostDetails = await response.json();
   if (!isNumeric(params.postId)) {
     return notFound();
   }

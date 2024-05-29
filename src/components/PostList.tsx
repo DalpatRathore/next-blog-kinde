@@ -5,13 +5,8 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import NotFound from "@/app/posts/not-found";
 
-// const postsUrl = "https://dummyjson.com/posts?limit=10";
-
 const PostList = async () => {
   await new Promise(resolve => setTimeout(resolve, 1000));
-  // const response = await fetch(postsUrl);
-  // const result = await response.json();
-  // const posts = result.posts;
   const posts = await prisma.post.findMany({
     orderBy: [{ id: "desc" }],
   });

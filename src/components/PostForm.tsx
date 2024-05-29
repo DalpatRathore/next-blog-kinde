@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -43,6 +42,7 @@ const PostForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await createPost(values);
+    // TODO: route to submitted post
     //  router.push(`/posts/${result.response.id}`);
     router.push("/posts");
   }

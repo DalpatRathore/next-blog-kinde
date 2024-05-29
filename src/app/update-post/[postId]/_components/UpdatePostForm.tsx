@@ -51,8 +51,8 @@ const UpdatePostForm = ({ post }: UpdatePostFormProps) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await updatePost(post.id, values);
-    //  router.push(`/posts/${result.response.id}`);
-    router.push("/posts");
+    router.refresh();
+    router.push(`/posts/${post.id}`);
   }
   return (
     <div className="max-w-xl mx-auto my-5">

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import prisma from "@/config/db";
 import { formatDateTime } from "@/lib/formatters";
-import { CalendarDays, NotebookPen, PenTool, Undo2 } from "lucide-react";
+import { CalendarDays, PenTool, Undo2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -79,21 +79,25 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
           <div className="flex items-center justify-center gap-5 border-t pt-5">
             {(await isAuthenticated()) ? (
               <>
-                {" "}
                 <Button variant="default" asChild>
                   <Link href={`/update-post/${post.id}`}>Edit</Link>
                 </Button>
                 <DeletePost postId={post.id}></DeletePost>
               </>
             ) : (
-              <>
-                <Button variant="default" disabled>
-                  Edit
-                </Button>
-                <Button variant="destructive" disabled>
-                  Delete
-                </Button>
-              </>
+              <div className="flex flex-col gap-y-3">
+                <div className="flex gap-5">
+                  <Button variant="default" disabled>
+                    Edit
+                  </Button>
+                  <Button variant="destructive" disabled>
+                    Delete
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground italic">
+                  Login to edit and delete post
+                </p>
+              </div>
             )}
           </div>
         </div>

@@ -1,11 +1,11 @@
 import prisma from "@/config/db";
 import { formatDateTime } from "@/lib/formatters";
-import { CalendarDays, Hash, PenIcon } from "lucide-react";
+import { CalendarDays, Hash } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import NotFound from "@/app/posts/not-found";
 
-const postsUrl = "https://dummyjson.com/posts?limit=10";
+// const postsUrl = "https://dummyjson.com/posts?limit=10";
 
 const PostList = async () => {
   await new Promise(resolve => setTimeout(resolve, 1000));

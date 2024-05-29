@@ -11,8 +11,6 @@ export const updatePost = async (postId: number, values: any) => {
     redirect("/api/auth/login");
   }
 
-  console.log(postId);
-
   const { title, content } = values;
 
   await prisma.post.update({

@@ -41,7 +41,7 @@ const PostForm = () => {
   const isSubmitting = form.formState.isSubmitting;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const response = await fetch("/api/create-post", {
+    const response = await fetch("/api/post", {
       method: "POST",
       headers: {
         Accept: "application/json",

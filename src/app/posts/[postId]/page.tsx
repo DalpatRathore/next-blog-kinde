@@ -5,6 +5,7 @@ import { CalendarDays, NotebookPen, PenTool, Undo2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import DeletePost from "./_components/DeletePost";
 
 // const postsUrl = "https://dummyjson.com/posts";
 // type PostDetails = {
@@ -70,6 +71,10 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
           <p className="text-xs md:text-base border-l-4 ml-2 pl-3">
             {post.content}
           </p>
+          <div className="flex items-center justify-center gap-5 border-t pt-5">
+            <Button variant="default">Edit</Button>
+            <DeletePost postId={post.id}></DeletePost>
+          </div>
         </div>
       </article>
       <div className="flex items-center justify-center mt-10">

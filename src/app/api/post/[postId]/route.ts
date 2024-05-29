@@ -5,21 +5,20 @@ import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { postId: string } }
 ) {
   const { isAuthenticated } = getKindeServerSession();
   if (!(await isAuthenticated())) {
     redirect("/api/auth/login");
   }
-  const post = await prisma.post.delete({
+  await prisma.post.delete({
     where: {
       id: Number(params.postId),
     },
   });
-  if (post) {
-    revalidatePath("/posts");
-  }
-  //   console.log(post);
-  return NextResponse.json(post);
+
+  revalidatePath("/posts");
+
+  return NextResponse.json({ message: "ok" });
 }

@@ -3,6 +3,7 @@ import { formatDateTime } from "@/lib/formatters";
 import { CalendarDays, Hash, PenIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import NotFound from "@/app/posts/not-found";
 
 const postsUrl = "https://dummyjson.com/posts?limit=10";
 
@@ -14,6 +15,10 @@ const PostList = async () => {
   const posts = await prisma.post.findMany({
     orderBy: [{ id: "desc" }],
   });
+
+  if (posts.length <= 0) {
+    return NotFound();
+  }
   return (
     <ul className="w-full max-w-3xl mx-auto py-5 space-y-5">
       {posts.map(post => (

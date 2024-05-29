@@ -1,4 +1,5 @@
 import { GridLayout } from "@/components/GridLayout";
+import QuoteDrawer from "@/components/QuoteDrawer";
 
 export default function Home() {
   return (

@@ -5,6 +5,7 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import SpeedDial from "@/components/SpeedDial";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
             <Header></Header>
             {children}
             <Footer></Footer>
+            <SpeedDial></SpeedDial>
           </Container>
         </ThemeProvider>
       </body>

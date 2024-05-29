@@ -1,4 +1,5 @@
 "use client";
+import { deletePost } from "@/actions/delete-post";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
@@ -7,10 +8,7 @@ const DeletePost = ({ postId }: { postId: number }) => {
 
   const onDelete = async (postId: number) => {
     try {
-      await fetch(`/api/post/${postId}`, {
-        method: "DELETE",
-      });
-
+      await deletePost(postId);
       router.refresh();
       router.push(`/posts`);
     } catch (error) {

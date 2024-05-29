@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { createPost } from "@/actions/create-post";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -41,19 +42,9 @@ const PostForm = () => {
   const isSubmitting = form.formState.isSubmitting;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const response = await fetch("/api/post", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data: values }),
-    });
-    const result = await response.json();
-    form.reset();
-    if (result) {
-      router.push(`/posts/${result.response.id}`);
-    }
+    await createPost(values);
+    //  router.push(`/posts/${result.response.id}`);
+    router.push("/posts");
   }
   return (
     <div className="max-w-xl mx-auto my-5">

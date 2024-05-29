@@ -5,18 +5,25 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function createPost(values: any) {
+export const updatePost = async (postId: number, values: any) => {
   const { isAuthenticated } = getKindeServerSession();
   if (!(await isAuthenticated())) {
     redirect("/api/auth/login");
   }
+
+  console.log(postId);
+
   const { title, content } = values;
 
-  await prisma.post.create({
+  await prisma.post.update({
+    where: {
+      id: postId,
+    },
     data: {
       title,
       content,
     },
   });
+
   revalidatePath("/posts");
-}
+};

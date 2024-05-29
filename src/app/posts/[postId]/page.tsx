@@ -24,6 +24,7 @@ import DeletePost from "./_components/DeletePost";
 const isNumeric = (str: string) => {
   return /^\d+$/.test(str);
 };
+
 const PostIdPage = async ({ params }: { params: { postId: string } }) => {
   await new Promise(resolve => setTimeout(resolve, 2000));
   // const response = await fetch(`${postsUrl}/${params.postId}`);
@@ -40,6 +41,7 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
   if (!post) {
     return notFound();
   }
+
   return (
     <div className="w-full max-w-3xl mx-auto py-10 px-5">
       <h2 className="text-2xl md:text-3xl font-semibold mb-5 text-muted-foreground">
@@ -72,7 +74,9 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
             {post.content}
           </p>
           <div className="flex items-center justify-center gap-5 border-t pt-5">
-            <Button variant="default">Edit</Button>
+            <Button variant="default" asChild>
+              <Link href={`/update-post/${post.id}`}>Edit</Link>
+            </Button>
             <DeletePost postId={post.id}></DeletePost>
           </div>
         </div>

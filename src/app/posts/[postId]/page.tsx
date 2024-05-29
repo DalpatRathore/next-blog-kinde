@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DeletePost from "./_components/DeletePost";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 // const postsUrl = "https://dummyjson.com/posts";
 // type PostDetails = {
@@ -37,6 +38,8 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
       id: Number(params.postId),
     },
   });
+
+  const { isAuthenticated } = getKindeServerSession();
 
   if (!post) {
     return notFound();
@@ -74,10 +77,24 @@ const PostIdPage = async ({ params }: { params: { postId: string } }) => {
             {post.content}
           </p>
           <div className="flex items-center justify-center gap-5 border-t pt-5">
-            <Button variant="default" asChild>
-              <Link href={`/update-post/${post.id}`}>Edit</Link>
-            </Button>
-            <DeletePost postId={post.id}></DeletePost>
+            {(await isAuthenticated()) ? (
+              <>
+                {" "}
+                <Button variant="default" asChild>
+                  <Link href={`/update-post/${post.id}`}>Edit</Link>
+                </Button>
+                <DeletePost postId={post.id}></DeletePost>
+              </>
+            ) : (
+              <>
+                <Button variant="default" disabled>
+                  Edit
+                </Button>
+                <Button variant="destructive" disabled>
+                  Delete
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </article>

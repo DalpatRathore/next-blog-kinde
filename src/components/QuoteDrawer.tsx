@@ -17,8 +17,8 @@ import { Skeleton } from "./ui/skeleton";
 const QuoteDrawer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
-    quote: "",
-    author: "",
+    quote: "Life is a sum of all our choices.",
+    author: "Albert Camus",
   });
 
   const fetchQuotes = async () => {
@@ -39,14 +39,14 @@ const QuoteDrawer = () => {
     fetchQuotes();
   }, []);
 
-  const handleButtonClick = () => {
+  const handleClick = () => {
     fetchQuotes();
   };
 
   return (
     <Drawer>
       <DrawerTrigger
-        onClick={handleButtonClick}
+        onClick={handleClick}
         className="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
       >
         <MessageSquareQuote className="w-6 h-6"></MessageSquareQuote>

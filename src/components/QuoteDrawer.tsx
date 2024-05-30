@@ -12,26 +12,33 @@ import {
 import { Button } from "./ui/button";
 import { MessageSquareQuote, Minus, Quote, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Skeleton } from "./ui/skeleton";
 
 const QuoteDrawer = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
-    quote: "Fetching new quote...",
+    quote: "",
     author: "",
   });
 
   const fetchQuotes = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch("https://stoic.tekloon.net/stoic-quote");
       const result = await response.json();
       setData(result);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     fetchQuotes();
   }, []);
+
   const handleButtonClick = () => {
     fetchQuotes();
   };
@@ -45,15 +52,21 @@ const QuoteDrawer = () => {
         <MessageSquareQuote className="w-6 h-6"></MessageSquareQuote>
       </DrawerTrigger>
       <DrawerContent>
-        <div className="mx-auto w-full max-w-2xl my-10 ">
+        <div className="mx-auto w-full max-w-2xl my-10">
           <DrawerHeader className="space-y-5">
             <Quote></Quote>
             <DrawerTitle className="border-l-4 pl-2 ml-2 leading-8 tracking-widest">
-              {data.quote || "Sorry something went wrong!"}
+              {isLoading ? (
+                <Skeleton className="h-[125px] w-full rounded" />
+              ) : (
+                data.quote
+              )}
             </DrawerTitle>
             <DrawerDescription className="flex items-center justify-end">
               <Minus className="mr-2"></Minus>
-              <span className="italic text-lg">{data.author || ""}</span>
+              <span className="italic text-lg">
+                {isLoading ? <Skeleton className="h-8 w-40" /> : data.author}
+              </span>
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter className="absolute top-0 right-0">

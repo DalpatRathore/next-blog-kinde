@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Container from "@/components/Container";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import SpeedDial from "@/components/SpeedDial";
+import toast, { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Container>
+            <Toaster position="top-center" reverseOrder={false} />
             <Header></Header>
             {children}
             <Footer></Footer>

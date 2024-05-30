@@ -18,6 +18,7 @@ import { Textarea } from "./ui/textarea";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createPost } from "@/actions/create-post";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -44,6 +45,8 @@ const PostForm = () => {
     await createPost(values);
     // TODO: route to submitted post
     //  router.push(`/posts/${result.response.id}`);
+    toast.success("Post created successfully!");
+
     router.push("/posts");
   }
   return (

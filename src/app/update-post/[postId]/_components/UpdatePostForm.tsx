@@ -19,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { updatePost } from "@/actions/update-post";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -51,6 +52,7 @@ const UpdatePostForm = ({ post }: UpdatePostFormProps) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await updatePost(post.id, values);
+    toast.success("Post updated successfully!");
     router.refresh();
     router.push(`/posts/${post.id}`);
   }

@@ -19,15 +19,16 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createPost } from "@/actions/create-post";
 import toast from "react-hot-toast";
+import { formSchema } from "@/lib/schema";
 
-const formSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
-  content: z.string().min(2, {
-    message: "Please provide content.",
-  }),
-});
+// const formSchema = z.object({
+//   title: z.string().min(2, {
+//     message: "Title must be at least 2 characters.",
+//   }),
+//   content: z.string().min(2, {
+//     message: "Please provide content.",
+//   }),
+// });
 
 const PostForm = () => {
   const router = useRouter();

@@ -51,7 +51,7 @@ const QuoteDrawer = () => {
       >
         <MessageSquareQuote className="w-6 h-6"></MessageSquareQuote>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="mx-2">
         <div className="mx-auto w-full max-w-2xl my-10">
           <DrawerHeader className="space-y-5">
             <Quote></Quote>
